@@ -1,2 +1,2 @@
-# compu_grafica
+# computación_grafica
 ejercicios basicos
