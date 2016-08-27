@@ -31,14 +31,41 @@ def matrizRandom(tamf, tamc):
 
     return m
 
-ma = matrizRandom(3,3)
-mb = matrizRandom(3,3)
-
 def transpuesta(m):
-    mr= [[0,0,0,],[0,0,0,],[0,0,0]]
+    mr= [[0,0,0,],
+         [0,0,0,],
+         [0,0,0]]
 
     for i in range(len(m)):
         for j in range(len(m)):
             mr[j][i] = m[i][j]
-
     return mr
+
+def suma_filas(m):
+    tam = len(m)
+    l = [0]*tam
+    for i in range(len(m)):
+        for j in range(len(m)):
+            l[j] += m[i][j]
+    return l
+
+
+def suma_columnas(m):
+    tam = len(m)
+    l = [0]*tam
+    for i in range(len(m)):
+        for j in range(len(m)):
+            l[j] += m[j][i]
+    return l
+
+ma = matrizRandom(3,3)
+mb = matrizRandom(3,3)
+
+fil = suma_filas(ma)
+col = suma_columnas(ma)
+for fila in ma:
+    print fila
+print
+print fil
+print
+print col

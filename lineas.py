@@ -24,7 +24,7 @@ def cartesiano2 (c, p, color):
     py = c[1]-p[1]
     punto= (px, py)
     pygame.draw.line(pantalla,color, c, punto)
-"""
+
 pygame.init()
 pantalla=pygame.display.set_mode((Ancho, Alto))
 
@@ -56,4 +56,3 @@ while 1:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             exit()
-"""
