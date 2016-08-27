@@ -4,6 +4,7 @@ import random
 
 m = [[2,0],[3,-6]]
 
+#cada numero de la matriz se multiplica por -1
 def matrizOpuesta(m):
     for fila in range(len(m)):
         for col in range(len(m)):
@@ -11,8 +12,7 @@ def matrizOpuesta(m):
     return m
 
 
-ma = []
-mb = []
+#Genera una matriz random mxn
 def matrizRandom(tamf, tamc):
     """
     f=[0]*3
@@ -30,7 +30,7 @@ def matrizRandom(tamf, tamc):
             m[i][j] = valor
 
     return m
-
+#retorna una matriz transpuesta, es decir cambia filas por columnas
 def transpuesta(m):
     mr= [[0,0,0,],
          [0,0,0,],
@@ -40,7 +40,7 @@ def transpuesta(m):
         for j in range(len(m)):
             mr[j][i] = m[i][j]
     return mr
-
+#suma todas las filas de una matriz|
 def suma_filas(m):
     tam = len(m)
     l = [0]*tam
@@ -48,8 +48,7 @@ def suma_filas(m):
         for j in range(len(m)):
             l[j] += m[i][j]
     return l
-
-
+#suma todsa las columnas de una matriz
 def suma_columnas(m):
     tam = len(m)
     l = [0]*tam
@@ -57,6 +56,10 @@ def suma_columnas(m):
         for j in range(len(m)):
             l[j] += m[j][i]
     return l
+
+ma = []
+mb = []
+
 
 ma = matrizRandom(3,3)
 mb = matrizRandom(3,3)

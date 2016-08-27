@@ -9,15 +9,15 @@ Rojo = [255, 0, 0]
 Verde = [0, 255, 0]
 Azul = [0, 0, 255]
 
-def dibujarEjes(c, p, al, an):
-    pygame.draw.line(p, Rojo, (0,c[1]), (an, c[1]))
-    pygame.draw.line(p, Rojo, (c[0], 0), (c[0], al))
+def dibujarEjes(c, p, alto, ancho):
+    pygame.draw.line(p, Rojo, (0,c[1]), (ancho, c[1]))
+    pygame.draw.line(p, Rojo, (c[0], 0), (c[0], alto))
 
-def cartesiano (pantalla,c, p, color):
-    px = c[0]+p[0]
-    py = c[1]-p[1]
-    punto= (px, py)
-    pygame.draw.line(pantalla,color, c, punto)
+def cartesiano (pantalla,centro, punto, color):
+    px = centro[0]+punto[0]
+    py = centro[1]-punto[1]
+    punto2= (px, py)
+    pygame.draw.line(pantalla,color, centro, punto2)
 
 def cartesiano2 (c, p, color):
     px = c[0]+p[0]
