@@ -2,7 +2,7 @@
 #que tengo desordenados, por hacer archivos a la ligera
 #3234979023
 #funciones de vectores
-
+import pygame
 #retorna la norma de un vector
 def norma(vec):
     n = math.sqrt(vec[0]**2 + vec[1]**2)
@@ -47,7 +47,7 @@ def perpendicular (vec1, vec2):
 #en dicho archivo debe ir las siguentes lineas comentadas
 #
 #pygame.init()  #inicia
-#pantalla=pygame.display.set_mode((Ancho, Alto))    #define tamaño de la pamtalla
+#pantalla=pygame.display.set_mode((Ancho, Alto))    #define tamano de la pamtalla
 
 #pygame.display.flip()    #refresca la pantalla
 #while 1:                  #ciclo para mantener la pantalla abierta
@@ -63,16 +63,39 @@ Verde = [0, 255, 0]
 Azul = [0, 0, 255]
 
 #dibuja los ejes en pantalla
-def dibujarEjes(c, p, alto, ancho):
-    pygame.draw.line(p, Rojo, (0,c[1]), (ancho, c[1]))
-    pygame.draw.line(p, Rojo, (c[0], 0), (c[0], alto))
-#dibuja un punto en un plano cartesiano dibujado anteriormente
-def cartesiano (pantalla,centro, punto, color):
+def dibujarEjes(centro, pantalla, alto, ancho, color):
+    pygame.draw.line(pantalla, color, (0,centro[1]), (ancho, centro[1]))
+    pygame.draw.line(pantalla, color, (centro[0], 0), (centro[0], alto))
+
+#dibuja linea desde la parte superior izquierda de la pantalla
+def dibujarlinea(pantalla, punto, color):
+    pygame.draw.line(pantalla,color, punto)
+#dibuja una linea en un plano cartesiano dibujado anteriormente
+def dibujarlineaEje (pantalla,centro, punto, color):
     px = centro[0]+punto[0]
     py = centro[1]-punto[1]
     punto2= (px, py)
     pygame.draw.line(pantalla,color, centro, punto2)
 
+#dibuja puntos desde la parte superior izquierda de la pantalla
+def dibujarPuntos(pantalla,punto, color):
+    pantalla.set_at(punto,color)
+#dibuja puntos con un centro establecido en pantalla
+def dibujarPuntosEje(pantalla,punto, color, centro):
+    px = centro[0]+punto[0]
+    py = centro[1]-punto[1]
+    punto2= (px, py)
+    pantalla.set_at(punto2,color)
+
+#dibuja circulos desde la parte superior izqueirda de la pamntalla
+def dibujarcirculo(pantalla,color, punto, radio, ancho):
+    pygame.draw.circle(pantalla,color,punto,radio,ancho)
+
+def dibujarcirculoEje(pantalla,color, punto, radio, ancho, centro):
+    px = centro[0]+punto[0]
+    py = centro[1]-punto[1]
+    punto2= (px, py)
+    pygame.draw.circle(pantalla,color,punto2,radio,ancho)
 
 #Funciones de matrices
 #cada numero de la matriz se multiplica por -1
@@ -90,7 +113,6 @@ def matrizRandom(tamf, tamc):
     m=[0]*3
     for i in range(len(f)):
         m[i] = f
-
     for fila in m:
         print fila
     """
