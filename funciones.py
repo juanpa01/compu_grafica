@@ -135,17 +135,18 @@ def transpuesta(m):
     return mr
 #suma todas las filas de una matriz|
 def suma_filas(m):
-    tam = len(m)
+    tam = len(m[0])
     l = [0]*tam
     for i in range(len(m)):
-        for j in range(len(m)):
+        for j in range(len(m[0])):
             l[j] += m[i][j]
     return l
 #suma todsa las columnas de una matriz
 def suma_columnas(m):
     tam = len(m)
     l = [0]*tam
-    for i in range(len(m)):
+    for i in range(len(m[0])):
         for j in range(len(m)):
             l[j] += m[j][i]
     return l
+
