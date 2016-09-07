@@ -15,9 +15,9 @@ def producto_punto(vec1,vec2):
 #retorna el angulo (gradientes) de dos vectores
 def angulo(vector1,vector2):
      a = math.fabs(producto_punto(vector1,vector2))
-    b = norma(vector1) * norma(vector2)
-    t = math.acos(a/b)
-    return math.degrees(t)
+     b = norma(vector1) * norma(vector2)
+     t = math.acos(a/b)
+     return math.degrees(t)
 #retorna la distancia entre dos puntos
 def distancia(p1,p2):
     a = p2[0]-p1[0]
@@ -46,7 +46,8 @@ def perpendicular (vec1, vec2):
 #funciones acerca de grficos
 #recordar que cada archivo que se use graficos
 #en dicho archivo debe ir las siguentes lineas comentadas
-#
+#Ancho = 600
+#Alto = 6000
 #pygame.init()  #inicia
 #pantalla=pygame.display.set_mode((Ancho, Alto))    #define tamano de la pamtalla
 
@@ -77,6 +78,9 @@ def dibujarlineaEje (pantalla,centro, punto, color):
     py = centro[1]-punto[1]
     punto2= (px, py)
     pygame.draw.line(pantalla,color, centro, punto2)
+#dibuja linea dado dos puntos en la pantalla
+def dibujarlineaPutnos (pantalla,punto1, punto2, color):
+    pygame.draw.line(pantalla,color, punto1, punto2)
 
 #dibuja puntos desde la parte superior izquierda de la pantalla
 def dibujarPuntos(pantalla,punto, color):
@@ -91,22 +95,53 @@ def dibujarPuntosEje(pantalla,punto, color, centro):
 #dibuja circulos desde la parte superior izqueirda de la pamntalla
 def dibujarcirculo(pantalla,color, punto, radio, ancho):
     pygame.draw.circle(pantalla,color,punto,radio,ancho)
-
+#dibuja circulos transladados a un plano cartesiano
 def dibujarcirculoEje(pantalla,color, punto, radio, ancho, centro):
     px = centro[0]+punto[0]
     py = centro[1]-punto[1]
     punto2= (px, py)
     pygame.draw.circle(pantalla,color,punto2,radio,ancho)
-    
+
+#translacion de un punto
+def transformadaPunto(punto, centro):
+    px = centro[0]+punto[0]
+    py = centro[1]-punto[1]
+    return (px,py)
+
+def traslacion(c,o):
+    lt=[]
+    for p in o:
+        x=c[0]+p[0]
+        y=c[1]-p[1]
+        lt.append([x,y])
+    return lt
+
+
+#dibuja un triangulo
+def dibujapoligono(pantalla, color, vertices, ancho):
+    pygame.draw.polygon(pantalla, color, vertices, ancho)
+
 #transformada de un punto
 def transformadaPunto(punto, centro):
     px = centro[0]+punto[0]
     py = centro[1]-punto[1]
     return (px,py)
 
-#dibuja un triangulo
-def dibujapoligono(pantalla, color, vertices, ancho):
-    pygame.draw.polygon(pantalla, color, vertices, ancho)
+#Hace escalamiento de puntos
+def escalamientoPunto(x, y, sx, sy):
+    x2 = x*sx
+    y2 = y*sy
+    return (x2, y2)
+
+def escalar(P,S):
+    cont=0
+    M=[]
+    while cont < len(P):
+        X=P[cont][0]*S[0]
+        Y=P[cont][1]*S[1]
+        M.append([X,Y])
+        cont+=1
+    return M
 
 #Funciones de matrices
 #cada numero de la matriz se multiplica por -1
@@ -160,4 +195,3 @@ def suma_columnas(m):
         for j in range(len(m)):
             l[j] += m[j][i]
     return l
-
