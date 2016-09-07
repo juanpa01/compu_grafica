@@ -3,6 +3,7 @@
 #3234979023
 #funciones de vectores
 import pygame
+import math
 #retorna la norma de un vector
 def norma(vec):
     n = math.sqrt(vec[0]**2 + vec[1]**2)
@@ -13,7 +14,7 @@ def producto_punto(vec1,vec2):
     return res
 #retorna el angulo (gradientes) de dos vectores
 def angulo(vector1,vector2):
-    a = math.fabs(punto(vector1,vector2))
+     a = math.fabs(producto_punto(vector1,vector2))
     b = norma(vector1) * norma(vector2)
     t = math.acos(a/b)
     return math.degrees(t)
@@ -96,6 +97,16 @@ def dibujarcirculoEje(pantalla,color, punto, radio, ancho, centro):
     py = centro[1]-punto[1]
     punto2= (px, py)
     pygame.draw.circle(pantalla,color,punto2,radio,ancho)
+    
+#transformada de un punto
+def transformadaPunto(punto, centro):
+    px = centro[0]+punto[0]
+    py = centro[1]-punto[1]
+    return (px,py)
+
+#dibuja un triangulo
+def dibujapoligono(pantalla, color, vertices, ancho):
+    pygame.draw.polygon(pantalla, color, vertices, ancho)
 
 #Funciones de matrices
 #cada numero de la matriz se multiplica por -1
