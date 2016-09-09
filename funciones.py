@@ -1,6 +1,6 @@
 #Este archivo almacenara las funciones utlizadas en los demas archivos
 #que tengo desordenados, por hacer archivos a la ligera
-#3234979023
+
 #funciones de vectores
 import pygame
 import math
@@ -42,8 +42,24 @@ def paralelas (vec1, vec2):
 def perpendicular (vec1, vec2):
     return vec1[1]*vec2[1] + vec1[0]*vec2[0]
 
+def rotacionPunto (punto,anguloG):
+    angulo = math.radians(anguloG)
+    px = punto[0]*math.cos(angulo) - punto[1]*math.sin(angulo)
+    py = punto[0]*math.sin(angulo) + punto[1]*math.cos(angulo)
+    return (px,py)
 
+def rotacionPuntos(puntos,anguloG):
+    cont = 0
+    pt = []
+    angulo = math.radians(anguloG)
+    while cont < len(puntos):
+        x = puntos[cont][0]*math.cos(angulo) - puntos[cont][1]*math.sin(angulo)
+        y = puntos[cont][0]*math.sin(angulo) + puntos[cont][1]*math.cos(angulo)
+        pt.append([int(x),int(y)])
+        cont = cont+1
+    return pt
 #funciones acerca de grficos
+
 #recordar que cada archivo que se use graficos
 #en dicho archivo debe ir las siguentes lineas comentadas
 #Ancho = 600
@@ -102,30 +118,23 @@ def dibujarcirculoEje(pantalla,color, punto, radio, ancho, centro):
     punto2= (px, py)
     pygame.draw.circle(pantalla,color,punto2,radio,ancho)
 
-#translacion de un punto
-def transformadaPunto(punto, centro):
-    px = centro[0]+punto[0]
-    py = centro[1]-punto[1]
-    return (px,py)
-
-def traslacion(c,o):
-    lt=[]
-    for p in o:
-        x=c[0]+p[0]
-        y=c[1]-p[1]
-        lt.append([x,y])
-    return lt
-
-
 #dibuja un triangulo
 def dibujapoligono(pantalla, color, vertices, ancho):
     pygame.draw.polygon(pantalla, color, vertices, ancho)
 
-#transformada de un punto
-def transformadaPunto(punto, centro):
+#translacion de un punto
+def traslacionPunto(punto, centro):
     px = centro[0]+punto[0]
     py = centro[1]-punto[1]
     return (px,py)
+
+def traslacionPuntos(centro,puntos):
+    pt=[]
+    for p in puntos:
+        x=centro[0]+p[0]
+        y=centro[1]-p[1]
+        pt.append([x,y])
+    return pt
 
 #Hace escalamiento de puntos
 def escalamientoPunto(x, y, sx, sy):
@@ -133,17 +142,18 @@ def escalamientoPunto(x, y, sx, sy):
     y2 = y*sy
     return (x2, y2)
 
-def escalar(P,S):
+def escalar(Puntos,S):
     cont=0
     M=[]
-    while cont < len(P):
-        X=P[cont][0]*S[0]
-        Y=P[cont][1]*S[1]
+    while cont < len(Puntos):
+        X=Puntos[cont][0]*S[0]
+        Y=Puntos[cont][1]*S[1]
         M.append([X,Y])
         cont+=1
     return M
 
 #Funciones de matrices
+
 #cada numero de la matriz se multiplica por -1
 def matrizOpuesta(m):
     for fila in range(len(m)):
