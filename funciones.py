@@ -42,13 +42,17 @@ def paralelas (vec1, vec2):
 def perpendicular (vec1, vec2):
     return vec1[1]*vec2[1] + vec1[0]*vec2[0]
 
-def rotacionPunto (punto,anguloG):
+
+
+#rota un punto segun un angulo
+
+def rotacion_punto (punto,anguloG):
     angulo = math.radians(anguloG)
     px = punto[0]*math.cos(angulo) - punto[1]*math.sin(angulo)
     py = punto[0]*math.sin(angulo) + punto[1]*math.cos(angulo)
     return (px,py)
 
-def rotacionPuntos(puntos,anguloG):
+def rotacion_puntos(puntos,anguloG):
     cont = 0
     pt = []
     angulo = math.radians(anguloG)
@@ -81,54 +85,54 @@ Verde = [0, 255, 0]
 Azul = [0, 0, 255]
 
 #dibuja los ejes en pantalla
-def dibujarEjes(centro, pantalla, alto, ancho, color):
+def dibujar_ejes(centro, pantalla, alto, ancho, color):
     pygame.draw.line(pantalla, color, (0,centro[1]), (ancho, centro[1]))
     pygame.draw.line(pantalla, color, (centro[0], 0), (centro[0], alto))
 
 #dibuja linea desde la parte superior izquierda de la pantalla
-def dibujarlinea(pantalla, punto, color):
+def dibujar_linea(pantalla, punto, color):
     pygame.draw.line(pantalla,color, punto)
 #dibuja una linea en un plano cartesiano dibujado anteriormente
-def dibujarlineaEje (pantalla,centro, punto, color):
+def dibujar_linea_eje (pantalla,centro, punto, color):
     px = centro[0]+punto[0]
     py = centro[1]-punto[1]
     punto2= (px, py)
     pygame.draw.line(pantalla,color, centro, punto2)
 #dibuja linea dado dos puntos en la pantalla
-def dibujarlineaPutnos (pantalla,punto1, punto2, color):
+def dibujar_linea_putnos (pantalla,punto1, punto2, color):
     pygame.draw.line(pantalla,color, punto1, punto2)
 
 #dibuja puntos desde la parte superior izquierda de la pantalla
-def dibujarPuntos(pantalla,punto, color):
+def dibujar_puntos(pantalla,punto, color):
     pantalla.set_at(punto,color)
 #dibuja puntos con un centro establecido en pantalla
-def dibujarPuntosEje(pantalla,punto, color, centro):
+def dibujar_puntos_eje(pantalla,punto, color, centro):
     px = centro[0]+punto[0]
     py = centro[1]-punto[1]
     punto2= (px, py)
     pantalla.set_at(punto2,color)
 
 #dibuja circulos desde la parte superior izqueirda de la pamntalla
-def dibujarcirculo(pantalla,color, punto, radio, ancho):
+def dibujar_circulo(pantalla,color, punto, radio, ancho):
     pygame.draw.circle(pantalla,color,punto,radio,ancho)
 #dibuja circulos transladados a un plano cartesiano
-def dibujarcirculoEje(pantalla,color, punto, radio, ancho, centro):
+def dibujar_circulo_eje(pantalla,color, punto, radio, ancho, centro):
     px = centro[0]+punto[0]
     py = centro[1]-punto[1]
     punto2= (px, py)
     pygame.draw.circle(pantalla,color,punto2,radio,ancho)
 
 #dibuja un triangulo
-def dibujapoligono(pantalla, color, vertices, ancho):
+def dibujar_poligono(pantalla, color, vertices, ancho):
     pygame.draw.polygon(pantalla, color, vertices, ancho)
 
 #translacion de un punto
-def traslacionPunto(punto, centro):
+def traslacion_punto(punto, centro):
     px = centro[0]+punto[0]
     py = centro[1]-punto[1]
     return (px,py)
 
-def traslacionPuntos(centro,puntos):
+def traslacion_puntos(centro,puntos):
     pt=[]
     for p in puntos:
         x=centro[0]+p[0]
@@ -137,12 +141,12 @@ def traslacionPuntos(centro,puntos):
     return pt
 
 #Hace escalamiento de puntos
-def escalamientoPunto(x, y, sx, sy):
+def escalar_Punto(x, y, sx, sy):
     x2 = x*sx
     y2 = y*sy
     return (x2, y2)
 
-def escalar(Puntos,S):
+def escalar_puntos(Puntos,S):
     cont=0
     M=[]
     while cont < len(Puntos):
@@ -160,33 +164,24 @@ def matrizOpuesta(m):
         for col in range(len(m)):
              m[fila][col] = m[fila][col] * -1
     return m
-
-
 #Genera una matriz random mxn
 def matrizRandom(tamf, tamc):
-    """
-    f=[0]*3
-    m=[0]*3
-    for i in range(len(f)):
-        m[i] = f
-    for fila in m:
-        print fila
-    """
-    m= [[0,0,0,],[0,0,0,],[0,0,0]]
+    cont = 0
+    m = []
     for i in range(tamf):
-        for j in range(tamc):
-            valor = random.randrange(7)
-            m[i][j] = valor
-
+        f = []
+        valor = random.randrange(5)
+        f.append(valor)
+        m.append(f)
+        for j in range(tamc-1):
+            valor2 = random.randrange(5)
+            m[i].append(valor2)
     return m
 #retorna una matriz transpuesta, es decir cambia filas por columnas
-def transpuesta(m):
-    mr= [[0,0,0,],
-         [0,0,0,],
-         [0,0,0]]
-
+def matriz_transpuesta(m):
+    mr = matriz_random(len(matriz[0]),len(matriz))
     for i in range(len(m)):
-        for j in range(len(m)):
+        for j in range(len(m[0])):
             mr[j][i] = m[i][j]
     return mr
 #suma todas las filas de una matriz|
@@ -205,3 +200,19 @@ def suma_columnas(m):
         for j in range(len(m)):
             l[j] += m[j][i]
     return l
+
+#suma dos matrices
+def suma_matrices(matriz1, matriz2):
+    aux = len(matriz1)
+    res = matriz_random(len(matriz1),len(matriz1))
+    for i in range(aux):
+        for j in range(aux):
+            res[i][j] = matriz1[i][j] + matriz2[i][j]
+    return res
+
+#Fgenera un vector de n posiciones
+def vector(n):
+    vec = []
+    for i in range(n):
+        vec.append(0)
+    return vec
