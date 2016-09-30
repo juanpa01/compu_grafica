@@ -14,6 +14,7 @@ TURQUEZA=(64,224,208)
 NARANJA=(255,69,0)
 VERDE=(0,128,0)
 
+
 if __name__ == '__main__':
     pygame.init()
     pantalla=pygame.display.set_mode([ANCHO,ALTO])
