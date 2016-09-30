@@ -35,4 +35,23 @@ if __name__ == "__main__":
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 fin = True
+                #archivo modificada para probar versionamiento
+                """
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if cont == 2:
+                   cont = 0
+                if cont == 0:
+                    punto1 = pygame.mouse.get_pos()
+                if cont == 1:
+                    lib.dibujarEjes(centro,pantalla,Alto,Ancho,lib.Negro)
+                    punto2 = pygame.mouse.get_pos()
 
+                    pt1 = lib.transformadaPunto(punto1, centro)
+                    pt2 = lib.transformadaPunto(punto2, centro)
+                    pygame.draw.line(pantalla,lib.Rojo, pt1, pt2)
+
+                    vec2 = lib.vector_Respuesta(punto1, punto2)
+                    lib.dibujarlineaEje(pantalla,centro,vec2,lib.Negro)
+                    pygame.display.flip()
+                cont += 1
+"""
