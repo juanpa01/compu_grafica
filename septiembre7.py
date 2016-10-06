@@ -1,5 +1,5 @@
 import pygame
-import li
+import lib
 
 
 Ancho = 600
@@ -8,8 +8,8 @@ centro = (300,300)
 pygame.init()  #inicia
 pantalla=pygame.display.set_mode((Ancho, Alto))    #define tamano de la pamtalla
 
-pantalla.fill(li.Blanco)
-li.dibujarEjes(centro, pantalla, Alto, Ancho, li.Rojo)
+pantalla.fill(lib.Blanco)
+lib.dibujar_ejes(centro, pantalla, Alto, Ancho, lib.Rojo)
 
 p1 = (50, 50)
 p2 = (75, 75)
@@ -18,16 +18,16 @@ p4 = (125, 50)
 
 puntos = (p1, p2, p3, p4)
 s = (2,2)
-puntosT = li.traslacion(centro,puntos)
+puntosT = lib.traslacion_puntos(centro,puntos)
 
-li.dibujapoligono(pantalla, li.Azul, puntosT, 1)
+lib.dibujar_poligono(pantalla, lib.Azul, puntosT, 1)
 
-puntosE = li.escalar(puntos, s)
-puntosET = li.traslacion(centro, puntosE)
+puntosE = lib.escalar_puntos(puntos, s)
+puntosET = lib.traslacion_puntos(centro, puntosE)
 
-li.dibujapoligono(pantalla, li.Azul, puntosET, 1)
-li.dibujapoligono(pantalla, li.Azul, li.traslacion(centro,li.escalar(puntos, (3,3))), 1)
-li.dibujapoligono(pantalla, li.Azul, li.traslacion(centro,li.escalar(puntos, (0.5,0.5))), 1)
+lib.dibujar_poligono(pantalla, lib.Azul, puntosET, 1)
+lib.dibujar_poligono(pantalla, lib.Azul, lib.traslacion_puntos(centro, lib.escalar_puntos(puntos, (3,3))), 1)
+lib.dibujar_poligono(pantalla, lib.Azul, lib.traslacion_puntos(centro,lib.escalar_puntos(puntos, (0.5,0.5))), 1)
 
 
 pygame.display.flip()    #refresca la pantalla
