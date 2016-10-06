@@ -15,6 +15,10 @@ NARANJA=(255,69,0)
 VERDE=(0,128,0)
 
 class jugador(pygame.sprite.Sprite):
+<<<<<<< HEAD
+=======
+    muros = None
+>>>>>>> 3b57727a243e7068d9b8af0809cbb1ed809b4114
     def __init__ (self, archivo):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(archivo).convert_alpha()
@@ -25,6 +29,10 @@ class jugador(pygame.sprite.Sprite):
     def update (self):
         pos = pygame.mouse.get_pos()
         self.rect.x = pos[0]
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 3b57727a243e7068d9b8af0809cbb1ed809b4114
         self.rect.y = pos[1]
 
 
@@ -35,15 +43,27 @@ class Enemigo(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.vel= 2
         self.fuego = 0
+<<<<<<< HEAD
         self.t = 40
+=======
+        self.t = 60
+        self.rect.x = 100
+        self.rect.y = 100
+>>>>>>> 3b57727a243e7068d9b8af0809cbb1ed809b4114
 
     def update (self):
         self.rect.x -= self.vel
 
     def time(self):
+<<<<<<< HEAD
         self.t = 1
         if self.t == 0:
             self.t = 40
+=======
+        self.t -= 1
+        if self.t == 0:
+            self.t = 60
+>>>>>>> 3b57727a243e7068d9b8af0809cbb1ed809b4114
             self.fuego = 1
         else:
             self.fuego = 0
@@ -55,18 +75,44 @@ class Disparo(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(archivo).convert_alpha()
         self.rect = self.image.get_rect()
+<<<<<<< HEAD
+=======
+        self.rect.x = 100
+        self.rect.y = 100
+>>>>>>> 3b57727a243e7068d9b8af0809cbb1ed809b4114
         self.vel = 10
         self.dir = 0
 
     def update (self):
+<<<<<<< HEAD
         if self.dir == 0:
             self.rect.x += self.vel
         if self.dir == 1:
             self.rect.x -= self.vel
+=======
+        if self.dir == 1:
+            self.rect.y += self.vel
+        else:
+            self.rect.y -= self.vel
+
+
+class Muro(pygame.sprite.Sprite):
+    def __init__ (self, archivo):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load(archivo).convert_alpha()
+        self.rect = self.image.get_rect()
+        self.rect.x = 0
+        self.rect.y = 0
+
+>>>>>>> 3b57727a243e7068d9b8af0809cbb1ed809b4114
 
 if __name__ == '__main__':
     pygame.init()
     pantalla=pygame.display.set_mode([ANCHO,ALTO])
+<<<<<<< HEAD
+=======
+    sonido_disparo = pygame.mixer.Sound('disparo.wav')
+>>>>>>> 3b57727a243e7068d9b8af0809cbb1ed809b4114
     pygame.mouse.set_visible(False)
     jp =  jugador('sprite/nave.png')
     todos = pygame.sprite.Group()
@@ -75,7 +121,11 @@ if __name__ == '__main__':
     enemigos = pygame.sprite.Group()
     for i in range(10):
         #x = random.randrange(ANCHO - 20)
+<<<<<<< HEAD
         x= ANCHO
+=======
+        x = ANCHO
+>>>>>>> 3b57727a243e7068d9b8af0809cbb1ed809b4114
         y = random.randrange(ALTO - 20)
         e = Enemigo('sprite/naveE.png')
         e.rect.x = x
@@ -84,6 +134,14 @@ if __name__ == '__main__':
         enemigos.add(e)
         todos.add(e)
 
+<<<<<<< HEAD
+=======
+    ls_muros = pygame.sprite.Group()
+    muro = Muro('sprite/muro.png')
+    ls_muros.add(muro)
+    todos.add(muro)
+
+>>>>>>> 3b57727a243e7068d9b8af0809cbb1ed809b4114
     balas = pygame.sprite.Group()
     ebalas = pygame.sprite.Group()
     pygame.display.flip()
@@ -97,17 +155,31 @@ if __name__ == '__main__':
                 b = Disparo('sprite/bala.png')
                 b.rect.x = jp.rect.x + 40
                 b.rect.y = jp.rect.y
+<<<<<<< HEAD
                 balas.add(b)
                 todos.add(b)
 
         #eliminar bala fuera
         for b in balas:
             ls_imp = pygame.sprite.spritecollide(b,enemigos, True)
+=======
+                sonido_disparo.play()
+                balas.add(b)
+                todos.add(b)
+
+        #eliminar balas fuera
+        for b in balas:
+            ls_imp = pygame.sprite.spritecollide(b, enemigos, True)
+>>>>>>> 3b57727a243e7068d9b8af0809cbb1ed809b4114
             for b_imp in ls_imp:
                 balas.remove(b)
                 todos.remove(b)
 
+<<<<<<< HEAD
             if b.rect.y < 0:
+=======
+            if b.rect.y > ANCHO:
+>>>>>>> 3b57727a243e7068d9b8af0809cbb1ed809b4114
                 balas.remove(b)
                 todos.remove(b)
 
@@ -124,6 +196,10 @@ if __name__ == '__main__':
                 enemigos.add(e)
                 todos.add(e)
 
+<<<<<<< HEAD
+=======
+            e.time()
+>>>>>>> 3b57727a243e7068d9b8af0809cbb1ed809b4114
             if e.fuego == 1:
                 b = Disparo('sprite/ball.png')
                 b.rect.x = e.rect.x
@@ -133,9 +209,14 @@ if __name__ == '__main__':
                 todos.add(b)
 
 
+<<<<<<< HEAD
 
         pantalla.fill(NEGRO)
         todos.update()
+=======
+        todos.update()
+        pantalla.fill(NEGRO)
+>>>>>>> 3b57727a243e7068d9b8af0809cbb1ed809b4114
         todos.draw(pantalla)
         pygame.display.flip()
         reloj.tick(60)
